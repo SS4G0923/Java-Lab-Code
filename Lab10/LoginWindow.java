@@ -3,9 +3,12 @@ package Lab10;
 import javax.swing.*;
 
 public class LoginWindow extends JFrame {
+    static JTextField usnField;
+    static JPasswordField passwordField;
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem item1, item2;
+    static JButton login;
     public LoginWindow(String name, int x, int y, int width, int height) {
         setLayout(new java.awt.FlowLayout());
         init(name);
@@ -18,24 +21,17 @@ public class LoginWindow extends JFrame {
     void init(String name){
         setTitle(name);
         JLabel username = new JLabel("用户名");
-        JTextField usnField = new JTextField(10);
+        usnField = new JTextField(10);
         JLabel password = new JLabel("密码");
-        JPasswordField passwordField = new JPasswordField(10);
-        JButton login = new JButton("登陆");
+         passwordField = new JPasswordField(10);
+        login = new JButton("登陆");
         add(username);
         add(usnField);
         add(password);
         add(passwordField);
         add(login);
-        login.addActionListener(e -> {
-            String usn = usnField.getText();
-            String pwd = new String(passwordField.getPassword());
-            if (usn.equals("admin") && pwd.equals("123456")) {
-                JOptionPane.showMessageDialog(null, "登陆成功");
-            } else {
-                JOptionPane.showMessageDialog(null, "登陆失败");
-            }
-        });
+        AllChecker ac = new AllChecker();
+        login.addActionListener(ac);
 
 
         menuBar = new JMenuBar();
@@ -48,7 +44,7 @@ public class LoginWindow extends JFrame {
         menuBar.add(menu);
         setJMenuBar(menuBar);
         item1.addActionListener(e -> {
-            RegisterWindow registerWindow = new RegisterWindow("注册账户", 600, 300, 300, 100);
+            new RegisterWindow("注册账户", 600, 300, 300, 100);
         });
     }
 }
